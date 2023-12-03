@@ -5,7 +5,7 @@
 import Product from "../Product";
 
 test("testing class Product", () => {
-    document.documentElement.innerHTML = `
+  document.documentElement.innerHTML = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -20,12 +20,13 @@ test("testing class Product", () => {
     </body>
     </html>`;
 
-  const product = new Product('phone', 10000);
+  const product = new Product("phone", 10000);
   const container = document.querySelector(".page");
   container.appendChild(product.element);
-  let result = document.querySelector("#phone").querySelector('.name').textContent;
-  expect(result).toBe('phone');
-  result = document.querySelector("#phone").querySelector('.price').textContent;
+  let result = document
+    .querySelector("#phone")
+    .querySelector(".name").textContent;
+  expect(result).toBe("phone");
+  result = document.querySelector("#phone").querySelector(".price").textContent;
   expect(result).toBe("10000");
-  }
-);
+});

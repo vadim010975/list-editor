@@ -1,4 +1,4 @@
-import data from './data';
+import data from "./data";
 
 export default class ProductList {
   constructor(containerEl, popup) {
@@ -9,15 +9,15 @@ export default class ProductList {
     this.products = data;
     this.removeProduct = this.removeProduct.bind(this);
     this.confirmDeletion = this.confirmDeletion.bind(this);
-    this.addEl = document.querySelector('.plus');
+    this.addEl = document.querySelector(".plus");
     this.onClickAdd = this.onClickAdd.bind(this);
-    this.addEl.addEventListener('click', this.onClickAdd);
+    this.addEl.addEventListener("click", this.onClickAdd);
     this.editProduct = this.editProduct.bind(this);
-    this.confirmEl = document.querySelector('.confirm');
+    this.confirmEl = document.querySelector(".confirm");
   }
 
   init() {
-    this.products.forEach(product => this.initProduct(product));
+    this.products.forEach((product) => this.initProduct(product));
     this.renderProducts();
   }
 
@@ -32,30 +32,30 @@ export default class ProductList {
 
   renderProducts() {
     this.clear();
-    this.products.forEach(product => {
+    this.products.forEach((product) => {
       this.renderProduct(product);
     });
   }
 
   clear() {
-    [...this.containerEl.children].forEach(el => el.remove());
+    [...this.containerEl.children].forEach((el) => el.remove());
   }
 
   removeProduct(product) {
-    this.products = this.products.filter(element => element !== product);
+    this.products = this.products.filter((element) => element !== product);
     this.renderProducts();
   }
 
   confirmDeletion(product) {
     const { bottom } = product.element.getBoundingClientRect();
-    this.confirmEl.classList.remove('hidden');
-    this.confirmEl.style.top = bottom + 'px';
-    this.confirmEl.querySelector('.yes').onclick = () => {
+    this.confirmEl.classList.remove("hidden");
+    this.confirmEl.style.top = bottom + "px";
+    this.confirmEl.querySelector(".yes").onclick = () => {
       this.removeProduct(product);
-      this.confirmEl.classList.add('hidden');
+      this.confirmEl.classList.add("hidden");
     };
-    this.confirmEl.querySelector('.no').onclick = () => {
-      this.confirmEl.classList.add('hidden');
+    this.confirmEl.querySelector(".no").onclick = () => {
+      this.confirmEl.classList.add("hidden");
     };
   }
 
@@ -64,7 +64,9 @@ export default class ProductList {
   }
 
   addProduct(product) {
-    const editableProduct = this.products.find(el => product.name === el.name);
+    const editableProduct = this.products.find(
+      (el) => product.name === el.name,
+    );
     if (editableProduct) {
       editableProduct.price = product.price;
       this.renderProducts();

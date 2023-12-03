@@ -4,24 +4,25 @@ export default class Tooltip {
   }
 
   showTooltip(message, element) {
-    const tooltipElement = document.createElement('DIV');
-    tooltipElement.classList.add('form-error')
+    const tooltipElement = document.createElement("DIV");
+    tooltipElement.classList.add("form-error");
     tooltipElement.textContent = message;
     const id = performance.now();
     this._tooltips.push({
       id,
-      element: tooltipElement
+      element: tooltipElement,
     });
     document.body.appendChild(tooltipElement);
     const { left, bottom } = element.getBoundingClientRect();
-    tooltipElement.style.left = left + element.offsetWidth / 2 - tooltipElement.offsetWidth / 2 + 'px';
-    tooltipElement.style.top = bottom + 5 + 'px';
+    tooltipElement.style.left =
+      left + element.offsetWidth / 2 - tooltipElement.offsetWidth / 2 + "px";
+    tooltipElement.style.top = bottom + 5 + "px";
     return id;
   }
 
   removeTooltip(id) {
-    const tooltip = this._tooltips.find(t => t.id === id);
+    const tooltip = this._tooltips.find((t) => t.id === id);
     tooltip.element.remove();
-    this._tooltips = this._tooltips.filter(t => t.id !== id);
+    this._tooltips = this._tooltips.filter((t) => t.id !== id);
   }
 }
