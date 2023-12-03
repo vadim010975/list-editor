@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="list-box">
+    <div class="list-title-wriper">
+      <h2 class="list-title">Товары</h2>
+      <button class="btn-icon plus"></button>
+    </div>
+    <div class="list">
+      <div class="list-head">
+        <div class="list-head-item">Название</div>
+        <div class="list-head-item">Стоимость</div>
+        <div class="list-head-item">Действия</div>
+      </div>
+      <div class="list-items">
+      </div>
+    </div>
+  </div>
+
+  <form class="form popup hidden" name="popup" novalidate>
+    <div class="form-control">
+      <label for="name">Название</label>
+      <input type="text" id="name" name="productName" placeholder="введите название" class="input name" required>
+      <label for="price">Стоимость</label>
+      <input type="text" id="price" name="productPrice" placeholder="введите стоимость" class="input price" required
+        pattern="^[1-9]\d+\.\d\d?$|^[1-9]\d+$">
+    </div>
+    <div class="buttons">
+      <button type="submit" class="btn submit">Сохранить</button>
+      <button type="button" class="btn cancel">Отмена</button>
+    </div>
+  </form>
+
+  <div class="confirm hidden">
+    <h2 class="confirm-title">Удалить ?</h2>
+    <div class="buttons">
+      <button type="button" class="btn no">Нет</button>
+      <button type="button" class="btn yes">Да</button>
+    </div>
+  </div>
+</body>
+
+</html>
