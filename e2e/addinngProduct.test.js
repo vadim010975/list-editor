@@ -1,23 +1,41 @@
 import puppeteer from "puppeteer";
+import { fork } from "child_process";
 
 jest.setTimeout(30000);
 
 describe("adding product", () => {
-  let browser;
-  let page;
+  let browser = null;
+  let page = null;
+  let server = null;
+  const baseUrl = "http://localhost:9000";
 
   beforeEach(async () => {
+    server = fork(`${__dirname}/e2e.server.js`);
+    await new Promise((resolve, reject) => {
+      server.on("error", reject);
+      server.on("message", (message) => {
+        if (message === "ok") {
+          resolve();
+        }
+      });
+    });
+
     browser = await puppeteer.launch({
       headless: "new",
-      slowMo: 100,
-      devtools: true,
+      // slowMo: 100,
+      // devtools: true,
     });
 
     page = await browser.newPage();
   });
 
+  afterAll(async () => {
+    await browser.close();
+    server.kill();
+  });
+
   test("testing adding product", async () => {
-    await page.goto("http://localhost:9000");
+    await page.goto(baseUrl);
     await page.waitForSelector(".plus");
     const btnPlus = await page.$(".plus");
     await page.waitForSelector(".list-items");
@@ -38,9 +56,5 @@ describe("adding product", () => {
         .textContent;
     });
     await expect(result).toBe("phone");
-  });
-
-  afterEach(async () => {
-    await browser.close();
   });
 });
