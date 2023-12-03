@@ -21,8 +21,8 @@ describe("adding product", () => {
     });
 
     browser = await puppeteer.launch({
-      headless: "new",
-      // slowMo: 100,
+      headless: false,
+      slowMo: 100,
       // devtools: true,
     });
 
